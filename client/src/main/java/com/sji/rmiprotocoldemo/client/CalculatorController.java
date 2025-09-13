@@ -18,7 +18,7 @@ public class CalculatorController {
 
     private final Short MAX_INPUT_LENGTH = 100;
 
-    private final String IP_ADD = "192.168.0.1";
+    private final String IP_ADD = "127.0.0.1";
 
     @FXML
     private void initialize() {
@@ -95,12 +95,12 @@ public class CalculatorController {
 
     @FXML
     private void multiply() {
-        appendOperator("×");
+        appendOperator("*");
     }
 
     @FXML
     private void divide() {
-        appendOperator("÷");
+        appendOperator("/");
     }
 
     // Functions
@@ -129,13 +129,7 @@ public class CalculatorController {
 
     @FXML
     private void percent() {
-        try {
-            double val = Double.parseDouble(currentInput);
-            val = val / 100;
-            currentInput = Double.toString(val);
-            display.setText(currentInput);
-        } catch (NumberFormatException e) {
-        }
+        appendOperator("%");
     }
 
     // Equals (you can expand this with proper expression evaluation)
@@ -162,7 +156,7 @@ public class CalculatorController {
     }
 
     private void appendOperator(String op) {
-        if (currentInput.length() < MAX_INPUT_LENGTH - 2) currentInput += " " + op + " ";
+        if (currentInput.length() < MAX_INPUT_LENGTH - 2) currentInput += op;
         display.setText(currentInput);
     }
 

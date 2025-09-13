@@ -18,7 +18,7 @@ val junitVersion = "5.12.1"
 java {
     modularity.inferModulePath = true
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
