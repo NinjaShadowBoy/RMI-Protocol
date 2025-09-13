@@ -1,4 +1,4 @@
-package com.sji.rmiprotocoldemo;
+package com.sji.rmiprotocoldemo.client;
 
 import javafx.application.Application;
 

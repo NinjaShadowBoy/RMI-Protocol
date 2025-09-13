@@ -1,0 +1,62 @@
+.root {
+    -fx-background-color: #1e1e2f;
+    -fx-font-family: "Consolas", sans-serif;
+}
+
+/* Display */
+.display-container {
+    -fx-background-color: #2d2d44;
+    -fx-padding: 10;
+}
+.display {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 44px;
+    -fx-font-weight: bold;
+}
+
+/* Base button */
+.button {
+    -fx-font-size: 24px;
+    -fx-background-radius: 12;
+    -fx-pref-width: 70;
+    -fx-pref-height: 70;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+/* Number buttons */
+.number-btn {
+    -fx-background-color: #3c3c59;
+}
+.number-btn:hover {
+    -fx-background-color: #50507a;
+}
+
+/* Operator buttons */
+.operator-btn {
+    -fx-background-color: #f39c12;
+}
+.operator-btn:hover {
+    -fx-background-color: #e67e22;
+}
+
+/* Function buttons (C, %, ±) */
+.function-btn {
+    -fx-background-color: #7f8c8d;
+}
+.function-btn:hover {
+    -fx-background-color: #95a5a6;
+}
+
+/* Equals button */
+.equals-btn {
+    -fx-background-color: #27ae60;
+}
+.equals-btn:hover {
+    -fx-background-color: #2ecc71;
+}
+
+/* Wide button (0) */
+.wide {
+    -fx-pref-width: 150;
+}
