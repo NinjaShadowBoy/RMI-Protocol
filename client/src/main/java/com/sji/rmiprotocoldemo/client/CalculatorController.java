@@ -18,7 +18,7 @@ public class CalculatorController {
 
     private final Short MAX_INPUT_LENGTH = 100;
 
-    private final String IP_ADD = "127.0.0.1";
+    private final String IP_ADD = "172.16.8.8";
 
     @FXML
     private void initialize() {
@@ -139,10 +139,11 @@ public class CalculatorController {
         try {
             Registry registry = LocateRegistry.getRegistry(IP_ADD);
 
-            String url = "rmi://" + IP_ADD + "/compute";
-
+            String url = "rmi://"+ IP_ADD + "/compute";
+            System.out.println("URL: "+ url);
+//
             ComputeEngineInterface stub = (ComputeEngineInterface) registry.lookup(url);
-
+            System.out.println("Current input: "+ currentInput);
             display.setText(stub.computeRequest(currentInput));
         } catch (Exception e) {
             display.setText(e.getMessage());
@@ -153,11 +154,14 @@ public class CalculatorController {
     private void appendNumber(String num) {
         if (currentInput.length() < MAX_INPUT_LENGTH) currentInput += num;
         display.setText(currentInput);
+        System.out.println(currentInput);
     }
 
     private void appendOperator(String op) {
         if (currentInput.length() < MAX_INPUT_LENGTH - 2) currentInput += op;
         display.setText(currentInput);
+        System.out.println(currentInput);
+
     }
 
 }

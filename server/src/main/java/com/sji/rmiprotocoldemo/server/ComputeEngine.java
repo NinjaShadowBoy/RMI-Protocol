@@ -6,16 +6,16 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class ComputeEngine extends UnicastRemoteObject implements ComputeEngineInterface {
-    ComputeEngine() throws RemoteException {
-        super();
+
+    protected ComputeEngine() throws RemoteException {
     }
-
-
 
     @Override
     public String computeRequest(String request) throws RemoteException {
         try {
-            return String.valueOf(Calculator.evaluate(request));
+            var res = String.valueOf(Calculator.evaluate(request));
+            System.out.println("result: " + res);
+            return res;
 
         } catch (Exception e) {
             return e.getMessage();

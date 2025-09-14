@@ -33,29 +33,27 @@ public class Calculator {
         Stack<Double> operands = new Stack<>();
 
         for (int i = 0; i < expression.length(); i++) {
-            char character = expression.charAt(i);
+            char character = expression.charAt(i); //current character
 
-            if (Character.isDigit(character)) {
-                StringBuilder num = new StringBuilder();
-                while (i < expression.length()) {
-                    if (Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.') {
-                        num.append(expression.charAt(i));
-                        i++;
-                    }
+            if (Character.isDigit(character)) { //if char is a number, check if other numbers follow it
+                String num = String.valueOf('0');
+                while (i < expression.length() && Character.isDigit(expression.charAt(i)) || (i < expression.length() && expression.charAt(i) == '.')) {
+                    num += (expression.charAt(i));
+                    i++;
                 }
-                operands.push(Double.parseDouble(num.toString()));
+                operands.push(Double.parseDouble(num));
                 i--;
-            } else if(isOperator(character)) {
-                if (!operands.empty() && priority(operators.peek()) >= priority(character)) {
-                    char _operator = operators.pop();
-                    char operator = _operator == '%' ? '/' : operators.pop(); //If the operator is %, then our operator becomes division
-                    double value1 = operands.pop();
-                    double value2 = operator == '%' ? 100 : operands.pop(); //If the operator is % then the second value is 100
 
-                    operands.push(compute(value1, value2, operator));
+            } else if(isOperator(character)) {
+                if (!operators.empty() && priority(operators.peek()) > priority(character)) {
+                    char _operator = operators.pop();
+                    char operator = _operator == '%' ? '/' : _operator; //If the operator is %, then our operator becomes division
+                    double value1 = operands.pop();
+                    double value2 = _operator == '%' ? 100 : operands.pop(); //If the operator is % then the second value is 100
+
+                    operands.push(compute(value2, value1, operator));
                 }
                 operators.push(character);
-
             }
         }
 
@@ -63,7 +61,7 @@ public class Calculator {
             char operator = operators.pop();
             double value1 = operands.pop();
             double value2 = operands.pop();
-            operands.push(compute(value1, value2, operator));
+            operands.push(compute(value2, value1, operator));
         }
         return operands.pop();
     }
