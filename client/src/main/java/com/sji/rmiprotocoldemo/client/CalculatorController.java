@@ -137,13 +137,12 @@ public class CalculatorController {
     private void calculate() throws RemoteException, NotBoundException {
         // RMI client call
         try {
-            Registry registry = LocateRegistry.getRegistry(IP_ADD);
+            Registry registry = LocateRegistry.getRegistry(IP_ADD, 1099);
 
-            String url = "rmi://" + IP_ADD + "/compute";
+            ComputeEngineInterface stub = (ComputeEngineInterface) registry.lookup("compute");
 
-            ComputeEngineInterface stub = (ComputeEngineInterface) registry.lookup(url);
-
-            display.setText(stub.computeRequest(currentInput));
+            currentInput = stub.computeRequest(currentInput);
+            display.setText(currentInput);
         } catch (Exception e) {
             display.setText(e.getMessage());
         }

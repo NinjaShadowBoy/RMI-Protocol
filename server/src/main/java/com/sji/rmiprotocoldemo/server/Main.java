@@ -17,16 +17,15 @@ public class Main {
             ComputeEngineInterface stub = (ComputeEngineInterface) UnicastRemoteObject.exportObject(obj, 0);
 
             Registry registry = LocateRegistry.createRegistry(1099);
-            String url = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/compute";
+            String serviceName = "compute";
+            String host = InetAddress.getLocalHost().getHostAddress();
+            String url = "rmi://" + host + ":1099" + "compute";
             System.out.println("Server started at " + url);
 
-
-            registry.bind(url, stub);
+            registry.rebind(serviceName, stub);
             System.out.println("Server started");
-            //Abena - 172.16.2.22
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
-
 }
