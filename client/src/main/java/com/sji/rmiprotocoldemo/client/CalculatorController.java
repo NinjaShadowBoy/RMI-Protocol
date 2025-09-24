@@ -18,7 +18,7 @@ public class CalculatorController {
 
     private final Short MAX_INPUT_LENGTH = 100;
 
-    private final String IP_ADD = "127.0.0.1";
+    private final String IP_ADD = "192.168.200.1";
 
     @FXML
     private void initialize() {
@@ -137,14 +137,19 @@ public class CalculatorController {
     private void calculate() throws RemoteException, NotBoundException {
         // RMI client call
         try {
-            Registry registry = LocateRegistry.getRegistry(IP_ADD, 1099);
+            // Connect to the server
+            Registry registry = LocateRegistry.getRegistry(IP_ADD, 8080);
 
+            // Lookup the remote object's stub in the registry'
             ComputeEngineInterface stub = (ComputeEngineInterface) registry.lookup("compute");
-
             currentInput = stub.computeRequest(currentInput);
+
+            // Update the display
             display.setText(currentInput);
+            System.out.println(currentInput);
         } catch (Exception e) {
             display.setText(e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -4,28 +4,29 @@ import java.util.Stack;
 
 public class Calculator {
 
+    // Gives precedence of the operator
     private static int priority(char operator) {
         return switch (operator) {
             case '+', '-' -> 0;
-            case '*', '/' -> 1;
+            case '*', '/', '÷', '×' -> 1;
             case '%' -> 2;
             default -> -1;
         };
     }
 
     private static boolean isOperator(char operator) {
-        return operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%';
+        return operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%' || operator == '×' || operator == '÷';
     }
 
+    // Computes the result of the given binary operator on the given operands
     private static Double compute(Double a, Double b, char operator) {
         return switch (operator){
             case '+'-> a + b;
             case '-'-> a - b;
-            case '*'->  a * b;
-            case '/'-> a / b;
+            case '*', '×'->  a * b;
+            case '/', '÷'-> a / b;
             default -> throw new IllegalArgumentException("Syntax error");
         };
-
     }
 
     public static Double evaluate(String expression) {
